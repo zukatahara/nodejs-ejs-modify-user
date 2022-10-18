@@ -1,27 +1,22 @@
 const express = require('express');
 const route = express.Router();
+const UserController = require('../controller/userController');
+const ViewController = require('../controller/viewController');
 
-const services = require('../services/render')
-const controller = require('../controller/controller')
-/**
- * @description Route Route
- * @method GET /
- */
-route.get('/', services.homeRouter)
-/**
- * @description add Route
- * @method GET /add-user
- */
-route.get('/add-user', services.add_user)
-/**
- * @description update Route
- * @method GET /update-user
- */
-route.get('/update-user', services.update_user)
+const userController = new UserController();
+const viewController = new ViewController();
+
+route.get('/', viewController.getHomePage);
+
+route.get('/add-user', viewController.addUser);
+
+route.get('/update-user', viewController.updateUser);
 
 //API
-route.post('/api/user', controller.create)
-route.get('/api/user', controller.find)
-route.put('/api/user/:id', controller.update)
-route.delete('/api/user/:id', controller.delete)
+route.get('/api/user', userController.getListUser)
+route.get('/api/view/:id', userController.getUserById)
+route.post('/api/user', userController.insertUser)
+route.post('/api/user/:id', userController.updateUser)
+route.get('/api/delete/user/:id', userController.deleteUser)
+
 module.exports = route; 

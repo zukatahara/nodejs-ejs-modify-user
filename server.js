@@ -5,10 +5,11 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const connectDB = require('./server/database/connection')
+const route = require('./server/routes/router');
 //
 const app = express();
 dotenv.config()
-const PORT = process.env.PORT || 3000 ;
+const PORT = process.env.PORT || 3000;
 
 //log request
 app.use(morgan('tiny'));
@@ -25,6 +26,6 @@ app.use('/img', express.static(path.resolve(__dirname, "assets/img")))
 app.use('/js', express.static(path.resolve(__dirname, "assets/js")))
 
 //load routers
-app.use('/',require('./server/routes/router'))
+app.use('/', route)
 
 app.listen(PORT, () => console.log(`Server running on: http://localhost:${PORT}/`))
