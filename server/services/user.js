@@ -1,27 +1,27 @@
-const UserDB = require("./../model/model");
+const User = require("../model/user");
 
 class UserService {
 
     getListUser = async () => {
-        return await UserDB.find();
+        return await User.find();
     }
 
     getUserById = async (id) => {
-        return await UserDB.findById(id);
+        return await User.findById(id);
     }
 
     insertUser = async (user) => {
-        const newUser = new UserDB(user);
+        const newUser = new User(user);
         await newUser.save()
     }
 
     updateUser = async (user) => {
         const { id, name, email, gender, status } = user;
-        await UserDB.findByIdAndUpdate(id, { name, email, gender, status })
+        await User.findByIdAndUpdate(id, { name, email, gender, status })
     }
 
     deleteUser = async (id) => {
-        await UserDB.findByIdAndDelete(id);
+        await User.findByIdAndDelete(id);
     }
 
 }
