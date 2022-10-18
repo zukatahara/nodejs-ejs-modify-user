@@ -22,23 +22,24 @@ $("#update_user").submit(function (e) {
     })
 })
 
-if(window.location.pathname == "/"){
+if (window.location.pathname == "/") {
+
     $ondelelte = $("a.delete");
-    $ondelelte.click(function(){
+    $ondelelte.click(function () {
         let id = $(this).attr("data-id")
         console.log(id);
         let request = {
-            "url": `http://localhost:3000/api/user/${id}`,
+            "url": `${window.location.host}/api/user/${id}`,
             "method": 'DELETE',
-            
+
         }
-        if(confirm("Chac chan xoa?")){
+        if (confirm("Chac chan xoa?")) {
             $.ajax(request).done(function (response) {
                 alert('Data Updated Success!')
                 location.reload();
             })
         }
     })
-    
-    
+
+
 }
