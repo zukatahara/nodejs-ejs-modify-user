@@ -16,7 +16,6 @@ class UserService {
     }
 
     updateUser = async (user) => {
-        console.log('user', user);
         const { id, name, email, gender, status } = user;
         await UserDB.findByIdAndUpdate(id, { name, email, gender, status })
     }
